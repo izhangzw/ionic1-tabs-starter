@@ -6,11 +6,11 @@
 
 1. 克隆工程到本地  `https://github.com/jDragonV/ionic1-tabs-starter.git`
 2. 进入工程目录执行
-`
+```
 $ npm install -g ionic@3.19.1
 $ npm install -g cordova@6.4.0
 $ npm install
-`
+```
 3. 运行工程 `ionic serve`
 
 
@@ -49,15 +49,15 @@ $ npm install
 |--apkSign.bat						    	// 签名命令
 |--babel.bat						      	// 编译命令
 |--bower.json						      	// ionic serve后没有他会警告找不到它
-|--config.xml						      	// 打包配置文件
-|--gulpfile.js					    		// gulp 命令
-|--ionic.config.json		  			// ionic工程配置文件
-|--okr.ks								        // 示例,android证书
-|--package.json					    		// nodejs配置文件
+|--config.xml				            // 打包配置文件
+|--gulpfile.js				          // gulp 命令
+|--ionic.config.json            // ionic工程配置文件
+|--okr.ks						            // 示例,android证书
+|--package.json			            // nodejs配置文件
 |--README.md
-|--.bowerrc							      	// eslint忽略配置
-|--.editorconfig				    		// ???
-|--.gitignore						      	// git忽略配置
+|--.bowerrc                     // eslint忽略配置
+|--.editorconfig                // ???
+|--.gitignore                   // git忽略配置
 ```
 
 
