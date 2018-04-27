@@ -1,0 +1,10 @@
+<ion-view  class="lg-bg" hide-nav-bar="true">
+    <ion-content scroll="false">
+        <div class="lg-logo" on-hold="version()"><img src="img/logo.png"></div>
+        <div class="lg-iptCont"><ion-icon class="lg-icons icon icon-user"></ion-icon><input type="text" ng-model="data.userName" placeholder="用户名" ng-keyup="kb4u($event)"></div>
+		<div class="lg-iptCont"><ion-icon class="lg-icons icon icon-mima"></ion-icon><input type="password" ng-model="data.password" placeholder="密码" ng-keyup="kb4p($event)"></div>
+		<!--<div class="lg-hint">用户名错误</div>-->
+		<div class="lg-btnCont"><button class="lg-submit" ng-click="login()">登 录</button></div>
+		<!--<div class="lg-btnCont"><a class="lg-pwd">忘记密码</a></div>   -->
+    </ion-content>	
+</ion-view>

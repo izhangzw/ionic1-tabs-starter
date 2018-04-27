@@ -1,0 +1,58 @@
+﻿/* ----reset---- */
+@charset "utf-8";
+*{margin:0; padding:0; color:inherit; box-sizing:border-box; font-family:Helvetica, arial, sans-serif;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+body{background:#fff; overflow-x:hidden;font-size:12px;-webkit-overflow-scrolling: touch;overflow-scrolling: touch;/*上下拉动滚动条时卡顿、慢*/}
+li{list-style:none;}
+img{border:none; width:100%; max-width:100%;}
+a{text-decoration:none;color:#333;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+i{font-style:normal;}
+b{font-weight:normal;}
+input, textarea, button, select{-webkit-appearance: none; border-radius: 0; outline:none; border:none;resize: none;}
+::-webkit-inner-spin-button {-webkit-appearance: none;}
+textarea::-webkit-input-placeholder{padding-left: 3px;}
+/*去掉ios&部分android系统中元素被点击时产生的边框*/
+a,button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);/*-webkit-user-modify:read-write-plaintext-only;*/}
+
+.flex{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}
+.flex-v{-webkit-box-orient:vertical;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}
+.flex-1{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;}
+.flex-align-center{-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;}
+.flex-align-end{-webkit-box-align: end;-webkit-align-items: flex-end;-ms-flex-align: end;align-items: flex-end;}
+.flex-align-start{-webkit-box-align: start;-webkit-align-items: flex-start;-ms-flex-align: start;align-items: flex-start;}
+.flex-pack-center{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}
+.flex-pack-end{-webkit-box-pack: end;-webkit-justify-content: flex-end;-ms-flex-pack: end;justify-content: flex-end;}
+.flex-pack-start{-webkit-box-pack: start;-webkit-justify-content: flex-start;-ms-flex-pack: start;justify-content: flex-start;}
+.flex-pack-justify{-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}
+
+/*一行... */
+/*不能与盒模型一起用, 容器内再加一层容器来搞定*/
+.line-ellipsis{overflow: hidden;text-overflow: ellipsis;-o-text-overflow:ellipsis;white-space: nowrap;}
+.hidden{display: none!important;}
+.visible{display: block!important}
+.inlineVisible{display: inline-block!important}
+.fl{float: left;}
+.fr{float: right;}
+
+.clearfix { *zoom: 1; }
+.clearfix:before,
+.clearfix:after { display: table; content: ""; line-height: 0; }
+.clearfix:after { clear: both; }
+
+/*border-1px*/
+.border-1px-top, .border-1px-bottom{position: relative;}
+.border-1px-top:before, .border-1px-bottom:after{content: ' ';display: block;width: 100%;position: absolute;left: 0;}
+.border-1px-top:before {border-top: 1px solid #c8c7cc;top: 0;}
+.border-1px-bottom:after {border-bottom: 1px solid #c8c7cc;bottom: 0;}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {.border-1px-top:before, .border-1px-bottom:after {-webkit-transform: scaleY(.7);-webkit-transform-origin: 0 0;-moz-transform: scaleY(.7);-ms-transform: scaleY(.7);-o-transform: scaleY(.7);transform: scaleY(.7);}}
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {.border-1px-top:before, .border-1px-bottom:after {-webkit-transform: scaleY(.5);-moz-transform: scaleY(.5);-ms-transform: scaleY(.5);-o-transform: scaleY(.5);transform: scaleY(.5);}}
+@media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) { .border-1px-top:before, .border-1px-bottom:after {-webkit-transform: scaleY(.3);-moz-transform: scaleY(.3);-ms-transform: scaleY(.3);-o-transform: scaleY(.3);transform: scaleY(.3);}}
+@media (-webkit-min-device-pixel-ratio: 4), (min-device-pixel-ratio: 4) { .border-1px-top:before, .border-1px-bottom:after {-webkit-transform: scaleY(.25);-moz-transform: scaleY(.25);-ms-transform: scaleY(.25);-o-transform: scaleY(.25);transform: scaleY(.25); }}
+/*/border-1px*/
+
+
+/**
+ * Action Sheets for Android
+ * --------------------------------------------------
+ */
+.platform-android .action-sheet-backdrop{-webkit-transition:background-color 150ms ease-in-out;transition:background-color 150ms ease-in-out;position:fixed;top:0;left:0;z-index:11;width:100%;height:100%;background-color:rgba(0,0,0,0)}.platform-android .action-sheet-backdrop.active{background-color:rgba(0,0,0,0.4)}.platform-android .action-sheet-wrapper{-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0);-webkit-transition:all cubic-bezier(0.36,0.66,0.04,1) 500ms;transition:all cubic-bezier(0.36,0.66,0.04,1) 500ms;position:absolute;bottom:0;left:0;right:0;width:100%;max-width:500px;margin:auto}.platform-android .action-sheet-up{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.platform-android .action-sheet{margin-left:8px;margin-right:8px;width:auto;z-index:11;overflow:hidden}.platform-android .action-sheet .button{display:block;padding:1px;width:100%;border-radius:0;border-color:#d1d3d6;background-color:transparent;color:#007aff;font-size:21px}.platform-android .action-sheet .button:hover{color:#007aff}.platform-android .action-sheet .button.destructive{color:#ff3b30}.platform-android .action-sheet .button.destructive:hover{color:#ff3b30}.platform-android .action-sheet .button.active,.platform-android .action-sheet .button.activated{box-shadow:none;border-color:#d1d3d6;color:#007aff;background:#e4e5e7}.platform-android .action-sheet-has-icons .icon{position:absolute;left:16px}.platform-android .action-sheet-title{padding:16px;color:#8f8f8f;text-align:center;font-size:13px}.platform-android .action-sheet-group{margin-bottom:8px;border-radius:4px;background-color:#fff;overflow:hidden}.platform-android .action-sheet-group .button{border-width:1px 0 0 0}.platform-android .action-sheet-group .button:first-child:last-child{border-width:0}.platform-android .action-sheet-options{background:#f1f2f3}.platform-android .action-sheet-cancel .button{font-weight:500}.platform-android .action-sheet-open{pointer-events:none}.platform-android .action-sheet-open.modal-open .modal{pointer-events:none}.platform-android .action-sheet-open .action-sheet-backdrop{pointer-events:auto}.platform-android .action-sheet .action-sheet-title,.platform-android .action-sheet .button{text-align:center}.platform-android .action-sheet-cancel{display:block}

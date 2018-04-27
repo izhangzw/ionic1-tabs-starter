@@ -1,0 +1,36 @@
+<ion-view view-title="通知" hide-back-button="true">
+	<ion-nav-buttons side="left">
+		<div class="buttons">
+			<button class="button" ng-click="page.edit()">编辑</button>
+		</div>
+	</ion-nav-buttons>
+	
+	<ion-content>
+		<ion-refresher pulling-text="下拉刷新..." on-refresh="page.refresh()"></ion-refresher>
+		
+		<div class="dynamic-list notify-list">
+			<ion-list>
+				<ion-item class="unread">
+					<a ng-href="!#">
+						<face ng-name="张家辉" ng-face=""></face>
+						<i class="circle"></i>
+						<div class="item-r">
+							<h3>xxxxxxxxxxxxxxxxxxx</b></h3>
+							<p>xxxxxx</p>
+						</div>
+						<span class="ion-chevron-right arraw"></span>
+					</a>
+				</ion-item>
+			</ion-list>
+		</div>
+		
+		
+		<ion-infinite-scroll
+			ng-if="page.more"
+			icon="ion-load-d"
+			distance="2%"
+			on-infinite="notify.list()">
+		</ion-infinite-scroll>
+	</ion-content>
+</ion-view>
+

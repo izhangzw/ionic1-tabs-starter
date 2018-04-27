@@ -1,0 +1,26 @@
+{
+  "name": "scoreOKR",
+  "app_id": "",
+  "type": "ionic1",
+  "integrations": {
+    "gulp": {},
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/scoreokr-web",
+      "proxyUrl": "http://127.0.0.1:8080/scoreokr-web/"
+    }
+  ],
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ],
+  "gulpStartupTasks": [
+	  "babel",
+	  "sass",
+	  "watch"
+	]
+}
