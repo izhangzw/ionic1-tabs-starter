@@ -3,6 +3,69 @@
  * 包含公用的service factory directive...
  */
 angular.module('app.commons', [])
+
+/**
+ * 跳转携带参数
+ *
+ * #/home?key=xxx
+ * 
+ * desc: create 2018/5/9
+ */
+.factory('$url',['$location', function($location){
+
+    const getParamsFromUrl = function(name){
+        var hash = location.hash;
+        var index = hash.indexOf('?');
+        var search = hash.substr(index);
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");//构造一个含有目标参数的正则表达式对象
+        var r = search.substr(1).match(reg);//匹配目标参数
+        if (r!=null) return unescape(r[2]); return '';//返回参数值
+    }
+    /**
+	 * 处理参数
+	 *
+	 * - 对象参数转成字符串
+	 * - 处理中文参数
+	 *
+     * @param params {object}
+	 * @return ret {object}
+     */
+	const cpu = (params) => {
+		const ret = {}
+		for(let key in params){
+			if(params.hasOwnProperty(key)){
+				let val = params[key];
+
+				if(typeof val === 'object')
+					val = JSON.stringify(val)
+
+				ret[key] = encodeURIComponent(val);
+			}
+		}
+		return ret;
+	}
+
+	return {
+        /**
+		 * 携带参数跳转
+		 *
+		 * @param url {string} 必填
+		 * @param params {object} 选填
+         */
+		jump(url, params){
+			params = params ? cpu(params) : {};
+			$location.path(url).search(params)
+		},
+        /**
+		 * 获取URL上的参数
+         * @param key
+         * @returns {返回参数值}
+         */
+		param(key){
+            return decodeURIComponent(getParamsFromUrl(key))
+		}
+	}
+}])
 //TODO rest
 .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
 	//Polyfill
