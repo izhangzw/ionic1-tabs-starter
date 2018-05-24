@@ -50,6 +50,11 @@ a,button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);/*-webkit-use
 @media (-webkit-min-device-pixel-ratio: 4), (min-device-pixel-ratio: 4) { .border-1px-top:before, .border-1px-bottom:after {-webkit-transform: scaleY(.25);-moz-transform: scaleY(.25);-ms-transform: scaleY(.25);-o-transform: scaleY(.25);transform: scaleY(.25); }}
 /*/border-1px*/
 
+/*提示信息*/
+.prompt{position:fixed;top:-40px;left:2.5%;z-index:11;width:95%;background:rgba(0,0,0,.6);line-height:32px;color:#fff;text-align: center;
+    font-size:14px;border-radius:5px;transition: all 0.3s ease;}
+.prompt i{font-size:20px;margin-right:5px;position:relative;top:2px;}
+.prompt.on{top:8px;}
 
 /**
  * Action Sheets for Android
