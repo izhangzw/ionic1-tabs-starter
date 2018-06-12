@@ -330,3 +330,68 @@ angular.module('app.commons', [])
 		}
 	}
 }])
+
+/**
+ * 防抖
+ *
+ * 立即出发函数，time毫秒内不重复出发
+ *
+ *
+ * 使用方式：
+ * 在标签中加入属性debounce="fn(,time)"
+ * fn是需要执行的函数名
+ * time是防抖间隔毫秒值，默认3000
+ *
+ * 例如：
+ * <a debounce="page.scan,2000"></a>
+ */
+.directive('debounce', [function(){
+    var debounce = function(fn, t, params){
+        var timeout;
+
+        debounce.cancel = function(){
+            clearTimeout(timeout);
+            timeout = null;
+        };
+
+        return function(){
+            var
+                ctx = this,
+                args = arguments,
+                exe = !timeout,
+                ret;
+            Array.prototype.push.call(args, params);
+
+
+            exe && fn && ( ret = fn.apply(this, args) );
+
+            if(!timeout){
+                timeout = setTimeout(function(){
+                    timeout = null;
+                }, t);
+            }
+
+            return ret;
+        }
+    };
+	return {
+        restrict: 'A',
+        link: function(scope, elment, attr){
+        	// 处理参数 - 分离函数名和点击间隔毫秒
+			// 参数规则 fn,time
+			// eg: page.scan,3000
+        	const attributes = attr.debounce;
+            let time = 3000;
+            let fn;
+            // caz 毫秒值可能不传
+            if(attributes.includes(',')){
+            	const arr = attributes.split(',');
+                fn = arr[0];
+                time = arr[1];
+			}else{
+                fn = attributes;
+			}
+			elment.bind('click', debounce(eval(`scope.${fn}`), time))
+        }
+    }
+}])
