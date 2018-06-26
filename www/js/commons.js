@@ -338,60 +338,72 @@ angular.module('app.commons', [])
  *
  *
  * 使用方式：
- * 在标签中加入属性debounce="fn(,time)"
+ * 在标签中加入属性debounce="fn(!params)(,time)"
  * fn是需要执行的函数名
- * time是防抖间隔毫秒值，默认3000
+ * params是fn的参数
+ * time是防抖间隔毫秒值，默认2000
  *
  * 例如：
- * <a debounce="page.scan,2000"></a>
+ * <a debounce="page.scan,3000"></a>
+ * <a debounce="file.open!id,2000"></a>
  */
 .directive('debounce', [function(){
-    var debounce = function(fn, t, params){
-        var timeout;
+	var debounce = function(fn, t, params){
+		var timeout;
 
-        debounce.cancel = function(){
-            clearTimeout(timeout);
-            timeout = null;
-        };
+		debounce.cancel = function(){
+			clearTimeout(timeout);
+			timeout = null;
+		};
 
-        return function(){
-            var
-                ctx = this,
-                args = arguments,
-                exe = !timeout,
-                ret;
-            Array.prototype.push.call(args, params);
+		return function(){
+			var
+				ctx = this,
+				args = arguments,
+				exe = !timeout,
+				ret;
+			//Array.prototype.push.call(args, params);
+			//args[0]._debounce_params_ = params;
+			exe && fn && ( ret = fn.call(ctx, params) );
 
-
-            exe && fn && ( ret = fn.apply(this, args) );
-
-            if(!timeout){
-                timeout = setTimeout(function(){
-                    timeout = null;
-                }, t);
-            }
-
-            return ret;
-        }
-    };
-	return {
-        restrict: 'A',
-        link: function(scope, elment, attr){
-        	// 处理参数 - 分离函数名和点击间隔毫秒
-			// 参数规则 fn,time
-			// eg: page.scan,3000
-        	const attributes = attr.debounce;
-            let time = 3000;
-            let fn;
-            // caz 毫秒值可能不传
-            if(attributes.includes(',')){
-            	const arr = attributes.split(',');
-                fn = arr[0];
-                time = arr[1];
-			}else{
-                fn = attributes;
+			if(!timeout){
+				timeout = setTimeout(function(){
+					timeout = null;
+				}, t);
 			}
-			elment.bind('click', debounce(eval(`scope.${fn}`), time))
-        }
-    }
+
+			return ret;
+		}
+	};
+	return {
+		restrict: 'A',
+		link: function(scope, elment, attr){
+			// 处理参数
+			// 参数规则 fn!params,time
+			// eg: page.scan!id,3000
+			const attributes = attr.debounce;
+			let time = 2000;
+			let fn_params;
+			let fn;
+			let params = '';
+			//分离函数和点击间隔毫秒
+			// caz 毫秒值可能不传
+			if(attributes.includes(',')){
+				const arr = attributes.split(',');
+                fn_params = arr[0];
+				time = arr[1];
+			}else{
+                fn_params = attributes;
+			}
+            //分离函数名和参数
+			if(fn_params.includes('!')){
+                const arr = fn_params.split('!');
+                fn = arr[0];
+                params = arr[1];
+			}else{
+				fn = fn_params;
+			}
+			elment.bind('click', debounce(eval(`scope.${fn}`), time, params))
+		}
+	}
 }])
