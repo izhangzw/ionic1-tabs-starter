@@ -60,9 +60,5 @@
     }
   },
   "dependencies": {
-  },
-  "cordovaPlatforms": [
-  	"ios",
-  	"android"
-  ]
+  }
 }
