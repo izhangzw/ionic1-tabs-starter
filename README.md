@@ -1,10 +1,11 @@
 # 简介
-这是一个ionic模板工程, 简化手机端开发而生成的生产模板
+这是一个ionic模板工程, 简化手机端开发而生成的生产模板   
 [FAQ](https://github.com/jDragonV/ionic1-tabs-starter/blob/master/FAQ.md)
+
 # 安装
 该工程依赖于node.js(>6.0) 安装[node.js](https://npm.taobao.org/mirrors/node)
 
-1. 克隆工程到本地  `https://github.com/jDragonV/ionic1-tabs-starter.git`
+1. 克隆工程到本地  `https://github.com/jDragonV/ionic1-tabs-starter.git`   
 2. 进入工程目录执行
 ```
 $ npm install -g ionic@3.19.1
@@ -59,6 +60,7 @@ $ npm install
 |--.editorconfig						// 编辑器配置，就是指统一不同编辑器的代码风格的配置
 |--.gitignore							// git忽略配置
 ```
+
 # 版本
 - node: v6.9.2
 - ionic: 3.19.1
