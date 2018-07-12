@@ -1,6 +1,6 @@
 # 简介
 这是一个ionic模板工程, 简化手机端开发而生成的生产模板
-
+[FAQ](https://github.com/jDragonV/ionic1-tabs-starter/blob/master/FAQ.md)
 # 安装
 该工程依赖于node.js(>6.0) 安装[node.js](https://npm.taobao.org/mirrors/node)
 
