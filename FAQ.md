@@ -118,3 +118,11 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 
 ### iOS11 吊起扫码程序两次
 通过debounce解决
+
+
+### Unable to tunnel through proxy. Proxy returns "HTTP/1.1 400 Bad Request
+检查`.gradle/gradle.properties`文件中是否设置了代理,将代理删掉
+
+
+
+
