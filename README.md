@@ -56,7 +56,7 @@ $ npm install
 |--package.json							// nodejs配置文件
 |--README.md
 |--.bowerrc								// eslint忽略配置
-|--.editorconfig						// ???
+|--.editorconfig						// 编辑器配置，就是指统一不同编辑器的代码风格的配置
 |--.gitignore							// git忽略配置
 ```
 # 版本
