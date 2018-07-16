@@ -99,9 +99,43 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 
 
 ### app中复制提示信息改为中文
-打开xcode，.plist文件，修改参数localization native development region的值改成China
+打开xcode，Resources/*-Info.plist文件，修改参数localization native development region的值改成China
 
-
+### 访问手机资源需要在config.xml中写入如下参数
+``XML
+<platform name="ios">
+<config-file parent="NSContactsUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的通讯录</string>
+</config-file>
+<config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的麦克风</string>
+</config-file>
+<config-file parent="NSPhotoLibraryUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的相册</string>
+</config-file>
+<config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的相机</string>
+</config-file>
+<config-file parent="NSPhotoLibraryAddUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能将图片添加到相册</string>
+</config-file>
+<config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能获取您的地理位置</string>
+</config-file>
+<config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能获取您的地理位置</string>
+</config-file>
+<config-file parent="NSBluetoothPeripheralUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的蓝牙</string>
+</config-file>
+<config-file parent="NSSpeechRecognitionUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能将语音转文字</string>
+</config-file>
+<config-file parent="NSCalendarsUsageDescription" target="*-Info.plist">
+    <string>嗨马需要您的允许才能访问您的日历</string>
+</config-file>
+</platform>
+```
 
 ### iPhoneX splash底部有一块白色区域
 这个BUG是cordova-ios的, [详情](https://github.com/ionic-team/ionic-v1/issues/331)
