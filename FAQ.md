@@ -103,7 +103,7 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 
 ### 访问手机资源需要在config.xml中写入如下参数
 > `This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSPhotoLibraryUsageDescription key with a string value explaining to the user how the app uses this data.`   
-``XML
+```XML
 <platform name="ios">
 <config-file parent="NSContactsUsageDescription" target="*-Info.plist">
     <string>嗨马需要您的允许才能访问您的通讯录</string>
