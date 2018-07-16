@@ -102,6 +102,7 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 打开xcode，Resources/*-Info.plist文件，修改参数localization native development region的值改成China
 
 ### 访问手机资源需要在config.xml中写入如下参数
+> `This app has crashed because it attempted to access privacy-sensitive data without a usage description. The app's Info.plist must contain an NSPhotoLibraryUsageDescription key with a string value explaining to the user how the app uses this data.`   
 ``XML
 <platform name="ios">
 <config-file parent="NSContactsUsageDescription" target="*-Info.plist">
