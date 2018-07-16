@@ -8,7 +8,8 @@ app
 	//host: 'http://116.204.25.82/scoreokr-web',//海南测试环境
 	host: 'http://appdev.mochasoft.com.cn:8000/scoreokr-web',//天津测试环境
 	//host: '/scoreokr-web',
-	version: '0.0.1'
+	version: '0.0.1',
+  debug: !1
 })
 .run(['$ionicPlatform', '$state', '$timeout', '$ionicViewService', '$rootScope', '$cordovaToast', '$cordovaStatusbar', '$App', function($ionicPlatform, $state, $timeout, $ionicViewService, $rootScope, $cordovaToast, $cordovaStatusbar, $App) {
 //	$rootScope.$on("$ionicView.beforeEnter", isWelcome($state));
