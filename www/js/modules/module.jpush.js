@@ -23,6 +23,10 @@
 	'use strict';
 
 	const module = angular.module('mJPush', [])
+   .constant('COPYRIGHT', {
+      author: 'zhangzw',
+      version: '0.0.1'
+    })
   .run(['$injector', '$ionicPlatform', ($injector, $ionicPlatform)=>{
     $ionicPlatform.ready(function() {
       $injector.invoke(['$JPush', function($JPush){
