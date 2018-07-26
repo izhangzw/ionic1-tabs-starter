@@ -1,0 +1,4 @@
+.prompt{position:fixed;top:-40px;left:2.5%;z-index:11;width:95%;background:rgba(0,0,0,.6);line-height:32px;color:#fff;text-align: center;font-size:14px;border-radius:5px;transition: all 0.3s ease;}
+.prompt i{font-size:20px;margin-right:5px;position:relative;top:2px;}
+.prompt.on{top:8px;}
+.IPHONEX .prompt.on{top: 32px}
