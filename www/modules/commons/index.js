@@ -28,7 +28,7 @@
   const module = angular.module('app.commons', [/*'mFile'*/])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.0.2'
+      version: '0.0.3'
     })
     // rest
     .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
@@ -51,24 +51,28 @@
       const paddingURL = function(url){
         if( url.startsWith('/') ){
           url = `${APP.host}${url}`;
+        }else if (url.startsWith('okr-web/')) {
+          url = url.replace(/okr-web/g, APP.host)
         }
         return url;
       };
 
       //执行ajax
       const processing = function(url, config){
-        console.log(`ajax: ${url}`)
         let datas = Object.assign({timeout: 15000}, { url: paddingURL(url) }, config);
+        //$log.log(`ajax: ${datas.url}`);
 
-        const gMsg = (errorMsg) => {
-          let msg = '请检查网络是否畅通';
-          if(errorMsg){
-            if(errorMsg.length>100){
-              msg = '服务器走神了';
-            }else{
-              msg = errorMsg;
-            }
-          }
+        /**
+         * 整合给用户看的错误信息
+         * @param v {string | number} Error Message From Server | HTTP Error Status
+         * @returns {string} 错误信息
+         */
+        const Error_Message = (msg = '请检查网络是否畅通') => {
+          if(msg.length > 100) msg = '服务器被二哈咬坏了';
+          switch (msg) {
+            case -1: msg = '服务器走神了..'; break;
+            default: break;
+          };
           return msg;
         };
 
@@ -78,8 +82,8 @@
               let {status, data, errorMsg, errorCode} = ret;
               status = status.toUpperCase();
               if (status === 'ERROR' || status === 'FAILED') {
-                errorMsg && ($toast.alert(gMsg(errorMsg)));
-                reject(gMsg(errorMsg));
+                errorMsg && ($toast.alert(Error_Message(errorMsg)));
+                reject(Error_Message(errorMsg));
 
                 if(errorCode==='0001'){
                   $rootScope.$broadcast('unauth')
@@ -89,7 +93,8 @@
               }
             })
             .error( (e, status, c) => {
-              reject(status)
+              $toast.alert(Error_Message(status));
+              reject(Error_Message(status));
             });
         });
         //拓展 - 可以使用 rest.success()
@@ -208,17 +213,49 @@
     }])
 
     .factory('Loginer', function(){
+      const emails = (()=>{
+        const key = '_used_email_';
+        const data = () => {
+        };
+        return {
+          get(){
+            const v = localStorage[key];
+            return v ? v.split(' ') : [];
+          },
+          add(value){
+            value = `@${value}`;
+            let v = this.get();
+            const len = v.length;
+            const i = v.indexOf(value);
+            if(len){
+              if(i!==-1){
+                v.splice(i, 1)
+              }
+              v.unshift(value)
+            }else{
+              v.push(value)
+            }
 
+            localStorage[key] = v.join(' ');
+          },
+          del(i){
+            let v = this.get();
+            v.splice(i, 1);
+            localStorage[key] = v.join(' ');
+          },
+        }
+      })();
       return {
         get(){
           return localStorage.loginer ? JSON.parse(localStorage.loginer) : '';
         },
         set(data){
-          localStorage.loginer = typeof data==='string' ? data : JSON.stringify(data);
+          localStorage.loginer = typeof data==='object' ? JSON.stringify(data) : data;
         },
         destory(){
           localStorage.removeItem('loginer')
         },
+        emails,
         // 加密
         encode(str){
           var hash = 0, i, chr, len;
