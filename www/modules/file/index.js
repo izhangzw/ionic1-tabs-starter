@@ -292,9 +292,9 @@
           upload(uri, url){
             return new Promise( (resolve, reject) => {
               $ionicLoading.show();
-
               sFile.upload(uri, url).then( resolve,
                 err => {
+                  alert(`22: ${JSON.stringify(err)}`)
                   $toast.alert(`上传出错[${err.code}]`)
                 },
                 progress => {
@@ -433,6 +433,10 @@
         },
         /**
          * 上传
+         * url {string}
+         * options {object}
+         *   - sourceType: 0 相机; 1 相册;
+         *   - mediaType: 0 图片; 1 视频; 2 所有;
          *
          * 参数请参见 https://www.npmjs.com/package/cordova-plugin-camera
          */
@@ -441,17 +445,6 @@
           return file.upload(uri, url)
         }
       }
-    }])
-    .directive('directive',[()=>{
-      console.log('directive')
-    }])
-    .filter('File.filter',[()=>{
-      console.log('filter')
-
-    }])
-    .controller('File.controller',[()=>{
-      console.log('controller')
-
     }]);
 
   return module;
