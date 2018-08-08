@@ -39,6 +39,10 @@
     'ngCordova.plugins.statusbar',
     'ngCordova.plugins.fileOpener2'
   ])
+    .constant('COPYRIGHT', {
+      author: 'zhangzw',
+      version: '0.0.1'
+    })
     .constant('PLATFORM', {
       IOS: 'ios',
       ANDROID: 'android',
