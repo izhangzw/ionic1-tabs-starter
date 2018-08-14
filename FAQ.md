@@ -159,5 +159,11 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 检查`.gradle/gradle.properties`文件中是否设置了代理,将代理删掉
 
 
+### autofocus输入域并弹起键盘   
 
-
+***Android***   
+使用cordova.plugin.Keyboard
+input 上加属性 autofocus   
+***iOS***   
+input 上加属性 autofocus   
+config.xml中加入代码 `<preference name="KeyboardDisplayRequiresUserAction" value="false" />`
