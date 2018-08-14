@@ -161,9 +161,10 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 
 ### autofocus输入域并弹起键盘   
 
-***Android***   
-使用cordova.plugin.Keyboard
-input 上加属性 autofocus   
+***Android***      
+`<input autofocus="autofocus" />`  
+并使用cordova.plugin.Keyboard   
+
 ***iOS***   
-input 上加属性 autofocus   
-config.xml中加入代码 `<preference name="KeyboardDisplayRequiresUserAction" value="false" />`
+`<input autofocus="autofocus" />`     
+并 config.xml中加入代码 `<preference name="KeyboardDisplayRequiresUserAction" value="false" />`
