@@ -7,6 +7,7 @@
  * $url
  * $toast
  * Loginer
+ * $keyboard
  *
  * 提供 自定义标签
  * debounce
@@ -28,7 +29,7 @@
   const module = angular.module('app.commons', [/*'mFile'*/])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.0.3'
+      version: '0.1.1'
     })
     // rest
     .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
@@ -71,6 +72,7 @@
           if(msg.length > 100) msg = '服务器被二哈咬坏了';
           switch (msg) {
             case -1: msg = '服务器走神了..'; break;
+            case 500: msg = '服务器被二哈咬坏了'; break;
             default: break;
           };
           return msg;
@@ -82,7 +84,7 @@
               let {status, data, errorMsg, errorCode} = ret;
               status = status.toUpperCase();
               if (status === 'ERROR' || status === 'FAILED') {
-                errorMsg && ($toast.alert(Error_Message(errorMsg)));
+                errorMsg && (datas.toast!==!1) && ($toast.alert(Error_Message(errorMsg)));
                 reject(Error_Message(errorMsg));
 
                 if(errorCode==='0001'){
@@ -93,7 +95,7 @@
               }
             })
             .error( (e, status, c) => {
-              $toast.alert(Error_Message(status));
+              (datas.toast!==!1) && ($toast.alert(Error_Message(status)));
               reject(Error_Message(status));
             });
         });
@@ -208,6 +210,51 @@
         },
         succ: function(m){
           _show(m, 'succ')
+        }
+      }
+    }])
+    /**
+     * 键盘
+     */
+    .factory('$keyboard', ['$ionicScrollDelegate', function($ionicScrollDelegate){
+      //监听唤起键盘
+      // window.addEventListener('native.keyboardshow', function kbs(){
+      //   //window.removeEventListener('native.keyboardshow', kbs);
+      //   console.log('show kb..!!??')
+      // });
+      //监听隐藏键盘
+      window.addEventListener('native.keyboardhide', function kbh(){
+        //window.removeEventListener('native.keyboardhide', kbh);
+        $ionicScrollDelegate.resize();
+      });
+
+      /**
+       *
+       * @returns 键盘对象 或者 undefined
+       */
+      const iHaveKeyboard = () => {
+
+        if(!iHaveKeyboard.yes){
+          const cdv = window.cordova;
+          if(cdv && cdv.plugins && cdv.plugins.Keyboard){
+            iHaveKeyboard.yes = window.cordova.plugins.Keyboard;
+          }
+        }
+
+        return iHaveKeyboard.yes;
+      };
+      return {
+        show(){
+          const keyboard = iHaveKeyboard();
+          if(keyboard) {
+            if(!keyboard.isVisible) keyboard.show()
+          }
+        },
+        hide(){
+          const keyboard = iHaveKeyboard();
+          if(keyboard) {
+            if(keyboard.isVisible) keyboard.close();
+          }
         }
       }
     }])
