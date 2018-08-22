@@ -49,6 +49,7 @@ $url.jump('/app/home', {reload: +new Date()});
 ```
 
 > 页面切换的动画效果   
+
 关闭跳转时候的动画效果：属性`nav-transition="none"`   
 全局关闭过渡效果：`$ionicConfigProvider.views.transition('none');`   
 自定义过度效果:
