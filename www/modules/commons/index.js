@@ -7,11 +7,11 @@
  * $url
  * $toast
  * Loginer
- * $keyboard
  *
  * 提供 自定义标签
  * debounce
- *
+ * $keyboard
+ * goNative
  */
 ;(function(angular, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -425,6 +425,8 @@
      *  flip: 网易云打开效果
      *  drawer: 推到右侧，还留了10%
      *  curl: 翻书
+     *
+     * duration: 动画执行时长/速率
      */
     .directive('goNative', ['$ionicGesture', '$ionicPlatform', function($ionicGesture, $ionicPlatform) {
       return {
