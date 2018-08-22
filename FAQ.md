@@ -48,6 +48,68 @@ $state.go('app.home', {}, {reload:true});
 $url.jump('/app/home', {reload: +new Date()});
 ```
 
+> 页面切换的动画效果   
+关闭跳转时候的动画效果：属性`nav-transition="none"`   
+全局关闭过渡效果：`$ionicConfigProvider.views.transition('none');`   
+自定义过度效果:
+
+首先 `cordova plugin add com.telerik.plugins.nativepagetransitions`   
+
+其次 `<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">`   
+再次 
+```js
+
+    /**
+     *
+     * direction: left | right | up | down
+     *  up 向上
+     *  down 向下
+     *
+     * transitiontype: fade | slide | flip | drawer | curl
+     *  flip: 网易云打开效果
+     *  drawer: 推到右侧，还留了10%
+     *  curl: 翻书
+     */
+    .directive('goNative', ['$ionicGesture', '$ionicPlatform', function($ionicGesture, $ionicPlatform) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          $ionicGesture.on('tap', function(e) {
+            const {direction='left', transitiontype='slide', duration='300'} = attrs;
+            $ionicPlatform.ready(function() {
+              if(!(window.plugins && window.plugins.nativepagetransitions)) return;
+              let options = {
+                duration
+              };
+              switch (transitiontype) {
+                case 'fade':
+                  break;
+                case 'drawer':
+                  options.origin = direction;
+                  options.action = 'open';
+                  break;
+                default:
+                  options.direction = direction;
+                  break;
+              }
+              window.plugins.nativepagetransitions[transitiontype](
+                options,
+                msg => {
+                  console.log(`success: ${msg}`)
+                },
+                msg => {
+                  console.log(`err: ${msg}`)
+                }
+              );
+            });
+          }, element);
+        }
+      };
+    }])
+```
+最后 `<a transitiontype="slide" direction="up" go-native>登录</a>`   
+
+
 
 # ionic我遇到的坑(持续更新ing...)
 
