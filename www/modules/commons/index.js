@@ -27,9 +27,23 @@
   'use strict';
 
   const module = angular.module('app.commons', [/*'mFile'*/])
+
+    .run(['$ionicPlatform', function($ionicPlatform){
+      $ionicPlatform.ready(function() {
+        // then override any default you want
+        //window.plugins.nativepagetransitions.globalOptions.duration = 300;
+        // window.plugins.nativepagetransitions.globalOptions.iosdelay = 350;
+        // window.plugins.nativepagetransitions.globalOptions.androiddelay = 350;
+        // window.plugins.nativepagetransitions.globalOptions.winphonedelay = 350;
+        // window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 4;
+        // // these are used for slide left/right only currently
+        // window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 0;
+        // window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 0;
+      });
+    }])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.1.1'
+      version: '0.2.0'
     })
     // rest
     .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
@@ -400,6 +414,53 @@
           elment.bind('click', debounce(eval(`scope.${fn}`), time, params))
         }
       }
+    }])
+    /**
+     *
+     * direction: left | right | up | down
+     *  up 向上
+     *  down 向下
+     *
+     * transitiontype: fade | slide | flip | drawer | curl
+     *  flip: 网易云打开效果
+     *  drawer: 推到右侧，还留了10%
+     *  curl: 翻书
+     */
+    .directive('goNative', ['$ionicGesture', '$ionicPlatform', function($ionicGesture, $ionicPlatform) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          $ionicGesture.on('tap', function(e) {
+            const {direction='left', transitiontype='slide', duration='300'} = attrs;
+            $ionicPlatform.ready(function() {
+              if(!(window.plugins && window.plugins.nativepagetransitions)) return;
+              let options = {
+                duration
+              };
+              switch (transitiontype) {
+                case 'fade':
+                  break;
+                case 'drawer':
+                  options.origin = direction;
+                  options.action = 'open';
+                  break;
+                default:
+                  options.direction = direction;
+                  break;
+              }
+              window.plugins.nativepagetransitions[transitiontype](
+                options,
+                msg => {
+                  console.log(`success: ${msg}`)
+                },
+                msg => {
+                  console.log(`err: ${msg}`)
+                }
+              );
+            });
+          }, element);
+        }
+      };
     }]);
 
   return module;
