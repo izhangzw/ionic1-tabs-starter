@@ -38,6 +38,8 @@ $ionicGoBack()
 $window.history.go(-1)
 // 
 $ionicHistory.backView().go()
+// 原路返回两级
+$ionicHistory.goBack(-2);
 ```
 
 > 跳转刷新
