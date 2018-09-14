@@ -38,7 +38,7 @@
 
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.0.5'
+      version: '0.0.6'
     })
     .constant('FILE_TYPE',{
       IMG: 'jpg png jpeg bmp gif',
@@ -275,7 +275,7 @@
             options = Object.assign({
               encodingType: Camera.EncodingType.JPEG,
               destinationType: Camera.DestinationType.FILE_URI,
-              quality: 50,
+              quality: 100,
               saveToPhotoAlbum: false,
               correctOrientation: true,
               mediaType: Camera.MediaType.ALLMEDIA
