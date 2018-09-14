@@ -14,6 +14,7 @@
  * 		//检查更新
  * 	  version()
  *
+ *
  */
 ;(function(angular, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -41,7 +42,7 @@
   ])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.0.1'
+      version: '0.0.2'
     })
     .constant('PLATFORM', {
       IOS: 'ios',

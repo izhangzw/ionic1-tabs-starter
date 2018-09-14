@@ -63,10 +63,10 @@
   pointer-events: auto;
 }
 .popup-container .popup {
-  width: 250px;
+  width: 320px;
   max-width: 100%;
   max-height: 90%;
-  border-radius: 0px;
+  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.9);
   display: -webkit-box;
   display: -webkit-flex;
@@ -82,13 +82,17 @@
   flex-direction: column;
 }
 .popup-head {
-  padding: 15px 10px;
-  border-bottom: 1px solid #eee;
+  padding: 30px 10px 10px;
+  border-bottom: 0;
   text-align: center;
 }
 .popup-body {
-  padding: 10px;
+  padding: 10px 30px;
   overflow: auto;
+  line-height: 24px;
+}
+.popup-body > a {
+  color: #0a9dc7;
 }
 .popup-buttons {
   display: -webkit-box;
@@ -112,7 +116,9 @@ h1:first-child, .h1:first-child, h2:first-child, .h2:first-child, h3:first-child
 .popup-title {
   margin: 0;
   padding: 0;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: bolder;
+
 }
 h3{
   color: #000;
@@ -133,7 +139,7 @@ h3{
   line-height: 20px;
   margin-right: 5px;
 }
-.button {
+/*.button {
   border-color: transparent;
   background-color: #f8f8f8;
   color: #444;
@@ -185,7 +191,9 @@ h3{
   text-decoration: none; }
 .button.button-positive.active, .button.button-positive.activated {
   border-color: #a2a2a2;
-  background-color: #0c60ee; }
+  background-color: #0c60ee; }*/
+
+
 .updateInfo{text-align: center}
 .updateInfo>.updateTitle{margin-top: 0; margin-bottom: 10px;}
 .updateInfo>.updateVersion{margin:0;font-size: 14px;}
@@ -197,7 +205,9 @@ h3{
   padding: 10px;
   border-radius: 0;
 }
-
+.IPHONEX .loading-container .loading{
+  padding-top: 44px;
+}
 /* Timer*/
 .timer{
   width: 24px;
