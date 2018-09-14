@@ -12,6 +12,7 @@
  * debounce
  * $keyboard
  * goNative
+ *
  */
 ;(function(angular, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -43,7 +44,7 @@
     }])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.2.0'
+      version: '0.2.2'
     })
     // rest
     .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
@@ -86,6 +87,7 @@
           if(msg.length > 100) msg = '服务器被二哈咬坏了';
           switch (msg) {
             case -1: msg = '服务器走神了..'; break;
+            case 401: msg = '';/*请重新登录*/ break;
             case 500: msg = '服务器被二哈咬坏了'; break;
             default: break;
           };
@@ -98,8 +100,9 @@
               let {status, data, errorMsg, errorCode} = ret;
               status = status.toUpperCase();
               if (status === 'ERROR' || status === 'FAILED') {
-                errorMsg && (datas.toast!==!1) && ($toast.alert(Error_Message(errorMsg)));
-                reject(Error_Message(errorMsg));
+                const msg = Error_Message(errorMsg);
+                msg && (datas.toast!==!1) && ($toast.alert(msg));
+                reject(msg);
 
                 if(errorCode==='0001'){
                   $rootScope.$broadcast('unauth')
@@ -109,8 +112,9 @@
               }
             })
             .error( (e, status, c) => {
-              (datas.toast!==!1) && ($toast.alert(Error_Message(status)));
-              reject(Error_Message(status));
+              const msg = Error_Message(status);
+              msg && (datas.toast!==!1) && ($toast.alert(msg));
+              reject(msg);
             });
         });
         //拓展 - 可以使用 rest.success()
@@ -164,13 +168,13 @@
        * @return ret {object}
        */
       const cpu = (params) => {
-        const ret = {}
+        const ret = {};
         for(let key in params){
           if(params.hasOwnProperty(key)){
             let val = params[key];
 
             if(typeof val === 'object')
-              val = JSON.stringify(val)
+              val = JSON.stringify(val);
 
             ret[key] = encodeURIComponent(val);
           }
@@ -216,7 +220,7 @@
         });
         $timeout(function(){
           $('.prompt').removeClass('on').hide(500)
-        }, 2000)
+        }, 3000)
       }
       return {
         alert: function(m){
@@ -226,6 +230,32 @@
           _show(m, 'succ')
         }
       }
+    }])
+    // ajax append token
+    .factory('token', ['$q', '$rootScope', 'Loginer', '$log', function ($q, $rootScope, Loginer, $log) {
+
+      return {
+        request(config){
+          const {url} = config;
+          if(!url.includes('.html')){
+            const {token} = Loginer.get();
+            if (token) {
+              config.headers['Authorization'] = token;
+            }
+          }
+          return config || $q.when(config);
+        }
+        ,responseError(response){
+          const {status, config} = response;
+          switch(status){
+            //case 504: $toast.alert('请检查网络是否畅通...');break;
+            //case 405: $rootScope.$broadcast('unauth'); break;
+            case 401: $rootScope.$broadcast('unauth', status); break;
+            //default: console.log(`请检查网络是否畅通(${status})...`);break;
+          }
+          return $q.reject(response);
+        }
+      };
     }])
     /**
      * 键盘
@@ -421,7 +451,7 @@
      *  up 向上
      *  down 向下
      *
-     * transitiontype: fade | slide | flip | drawer | curl
+     * transitiontype: slide | fade | flip | drawer | curl
      *  flip: 网易云打开效果
      *  drawer: 推到右侧，还留了10%
      *  curl: 翻书
@@ -463,6 +493,39 @@
           }, element);
         }
       };
+    }])
+    /**
+     * slide 方式过渡跳转
+     *
+     * $native4slide.jump(url, data);
+     * $native4slide.go(state, data);
+     */
+    .service('$native4slide', ['$state', '$url', '$ionicHistory', function($state, $url, $ionicHistory) {
+      const goNative = (direction) => {
+        if(!(window.plugins && window.plugins.nativepagetransitions)) return;
+        window.plugins.nativepagetransitions.slide({
+          duration: 300,
+          direction
+        },
+        msg => {
+          console.log(`$native4slide success: ${msg}`)
+        },
+        msg => {
+          console.log(`$native4slide err: ${msg}`)
+        });
+      };
+      this.jump = (url, data, direction) => {
+        $url.jump(url, data);
+        goNative(direction);
+      };
+      this.go = (state, data, direction) => {
+        $state.go(state, data);
+        goNative(direction);
+      };
+      this.back = (direction) => {
+        $ionicHistory.goBack();
+        goNative(direction);
+      }
     }]);
 
   return module;
