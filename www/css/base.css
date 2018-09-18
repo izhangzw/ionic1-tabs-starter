@@ -28,6 +28,20 @@ a,button,input,textarea{-webkit-tap-highlight-color: rgba(0,0,0,0);/*-webkit-use
 /*一行... */
 /*不能与盒模型一起用, 容器内再加一层容器来搞定*/
 .line-ellipsis{overflow: hidden;text-overflow: ellipsis;-o-text-overflow:ellipsis;white-space: nowrap;}
+/*两行... */
+.line2-ellipsis{
+    display: box;
+    display: -moz-box;
+    display: -webkit-box;
+
+    box-orient: vertical;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 .hidden{display: none!important;}
 .visible{display: block!important}
 .inlineVisible{display: inline-block!important}
