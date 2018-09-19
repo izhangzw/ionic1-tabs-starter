@@ -9,6 +9,7 @@
  * Loginer
  *
  * 提供 自定义标签
+ * face
  * debounce
  * $keyboard
  * goNative
@@ -388,7 +389,7 @@
           });
         }
       }
-    }]);
+    }])
     /**
      * 防抖
      *
