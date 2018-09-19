@@ -2,3 +2,42 @@
 .prompt i{font-size:20px;margin-right:5px;position:relative;top:2px;}
 .prompt.on{top:8px;}
 .IPHONEX .prompt.on{top: 32px}
+
+
+/*
+头像
+44*44
+large 60*60
+super 80*80
+*/
+.photo{
+  border-radius: 50%;
+  color: #4d4d4d;
+  width: 44px;
+  height: 44px;
+  background-size: contain;
+  background-color: #d6dadc;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.photo.forename{
+  font-weight: 700;
+  text-align: center;
+  display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;
+  -webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;
+  -webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;
+}
+.photo-large .photo{
+  width: 60px;
+  height: 60px;
+}
+.photo-super .photo{
+  width: 80px;
+  height: 80px;
+}
+.photo-large .photo.forename{
+  font-size: 20px;
+}
+.photo-super .photo.forename{
+  font-size: 24px;
+}

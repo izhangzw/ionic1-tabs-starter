@@ -44,7 +44,7 @@
     }])
     .constant('COPYRIGHT', {
       author: 'zhangzw',
-      version: '0.2.2'
+      version: '0.2.3'
     })
     // rest
     .factory('$restfuller', ['$rootScope', '$http', '$q', '$log', '$state', 'APP', '$toast', 'Loginer', function($rootScope, $http, $q, $log, $state, APP, $toast, Loginer) {
@@ -370,6 +370,26 @@
       }
     })
     /**
+     * 头像指令，包含默认头像
+     */
+    .directive('face', ['Loginer', 'APP', function(Loginer, APP){
+      return {
+        restrict : 'E',
+        // replace: !0,
+        //template: `<a><img class="photo default" ng-src="{{face}}" ng-if="face"/><div class="photo default" ng-if="!face">{{name.substring(0,1)}}</div></a>`,
+        template: `<div class="photo" ng-if="face" style="background-image:url('{{face}}')"></div>
+               <div class="photo forename" ng-if="!face">{{name.substring(0,1)}}</div>`,
+        link: function(scope, element, attrs){
+          attrs.$observe('ngFace', function (value) {
+            scope.face = value ? `${APP.host}/api/v1/head/${value}` : value;
+          });
+          attrs.$observe('ngName', function (value) {
+            scope.name = value;
+          });
+        }
+      }
+    }]);
+    /**
      * 防抖
      *
      * 立即出发函数，time毫秒内不重复出发
@@ -514,15 +534,15 @@
           console.log(`$native4slide err: ${msg}`)
         });
       };
-      this.jump = (url, data, direction) => {
+      this.jump = (url, data, direction='left') => {
         $url.jump(url, data);
         goNative(direction);
       };
-      this.go = (state, data, direction) => {
+      this.go = (state, data, direction='left') => {
         $state.go(state, data);
         goNative(direction);
       };
-      this.back = (direction) => {
+      this.back = (direction='right') => {
         $ionicHistory.goBack();
         goNative(direction);
       }
