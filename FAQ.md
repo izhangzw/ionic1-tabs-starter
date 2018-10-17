@@ -235,4 +235,9 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 
 
 ### 如果发现 input/textarea的光标不见了, 输入内容不显示,  但键盘打开状态   
-查看dom中是不是多了一个同样的input/textarea 且 class中包含`previous-input-focus`   
+查看dom中是不是多了一个同样的input/textarea 且 class中包含`previous-input-focus`,
+```css
+.previous-input-focus, .cloned-text-input + input, .cloned-text-input + textarea{
+
+}
+```
