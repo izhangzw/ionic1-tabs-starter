@@ -243,3 +243,11 @@ ionic中源码
     left: -9999px;
 }
 ```
+
+### 不记录路由   
+```
+      const history = $ionicHistory.viewHistory();
+      const backView = history && (history.backView);
+      const refer = backView && (backView.url);
+      if(refer && refer.includes('/o/kr/')) $ionicHistory.removeBackView();
+```
