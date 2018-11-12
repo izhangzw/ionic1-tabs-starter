@@ -45,7 +45,7 @@ $ionicHistory.goBack(-2);
 > 跳转刷新
 
 ```js
-$state.go('app.home', {}, {reload:true});
+$state.go('app.home', {}, {reload:true});//不起作用
 //$url自己封装的
 $url.jump('/app/home', {reload: +new Date()});
 ```
