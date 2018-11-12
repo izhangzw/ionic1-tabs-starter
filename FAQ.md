@@ -45,7 +45,8 @@ $ionicHistory.goBack(-2);
 > 跳转刷新
 
 ```js
-$state.go('app.home', {}, {reload:true});//不起作用
+//当需要用到路由缓存, 又需要强制刷新的时候, 可以在路由中加参数 例如
+$state.go('app.home', {reload: +new Date(), id: 'xx'});
 //$url自己封装的
 $url.jump('/app/home', {reload: +new Date()});
 ```
