@@ -252,3 +252,7 @@ ionic中源码
       const refer = backView && (backView.url);
       if(refer && refer.includes('/o/kr/')) $ionicHistory.removeBackView();
 ```
+
+### android tab跟随键盘, 且debug发现页面被压瘪
+
+修改`/platfroms/android/app/src/main/AndroidManifest.xml`下`android:windowSoftInputMode="adjustPan"`
