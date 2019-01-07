@@ -255,8 +255,8 @@ ionic中源码
 
 ### android tab跟随键盘, 且debug发现页面被压瘪
 
-前提 **Cordova 6.4+**
-config.xml加配置
+前提 **Cordova 6.4+**   
+config.xml加配置   
 ```
 <widget xmlns:android="http://schemas.android.com/apk/res/android" ...>
     ...
@@ -266,5 +266,5 @@ config.xml加配置
     ...
 </widget>
 ```
-如果不行, 手动改:
+如果不行, 手动改:   
 修改`/platfroms/android/app/src/main/AndroidManifest.xml`下`android:windowSoftInputMode="adjustPan"`
