@@ -172,28 +172,28 @@ iOS在被复制的元素上引用该class, 并添加属性. 例如`<h2 class="se
 ```XML
 <platform name="ios">
 <config-file parent="NSContactsUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能访问您的通讯录</string>
+    <string>xx需要您的允许才能访问您的通讯录</string>
 </config-file>
 <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能访问您的麦克风</string>
+    <string>xx需要您的允许才能访问您的麦克风</string>
 </config-file>
 <config-file parent="NSPhotoLibraryUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能访问您的相册</string>
+    <string>xx需要您的允许才能访问您的相册</string>
 </config-file>
 <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能访问您的相机</string>
+    <string>xx需要您的允许才能访问您的相机</string>
 </config-file>
 <config-file parent="NSPhotoLibraryAddUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能将图片添加到相册</string>
+    <string>xx需要您的允许才能将图片添加到相册</string>
 </config-file>
 <config-file parent="NSLocationAlwaysUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能获取您的地理位置</string>
+    <string>xx需要您的允许才能获取您的地理位置</string>
 </config-file>
 <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能获取您的地理位置</string>
+    <string>xx需要您的允许才能获取您的地理位置</string>
 </config-file>
 <config-file parent="NSBluetoothPeripheralUsageDescription" target="*-Info.plist">
-    <string>嗨马需要您的允许才能访问您的蓝牙</string>
+    <string>xx需要您的允许才能访问您的蓝牙</string>
 </config-file>
 <config-file parent="NSSpeechRecognitionUsageDescription" target="*-Info.plist">
     <string>嗨马需要您的允许才能将语音转文字</string>
